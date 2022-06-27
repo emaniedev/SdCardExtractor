@@ -6,9 +6,9 @@ namespace PhotoExtractor
 {
     public class SdReader
     {
-        public static List<FileInfo> ReadSdCameraCard()
+        public static List<FileInfo>? ReadSdCameraCard()
         {
-            List<FileInfo> cameraFiles = new List<FileInfo>();
+            List<FileInfo> cameraFiles = new();
             List<DriveInfo> drives = DriveInfo.GetDrives().ToList();
             IEnumerable<DriveInfo> posibleDrives = SearchPosibleDrives(drives);
 
@@ -17,7 +17,7 @@ namespace PhotoExtractor
                 Console.WriteLine("Nombre: {0} Volumen: {1} Tipo: {2} Formato: {3} Root: {4}", drive.Name, drive.VolumeLabel, drive.DriveType, drive.DriveFormat, drive.RootDirectory);
                 IEnumerable<DirectoryInfo> directories = SearchKeyDirectories(drive);
 
-                if (!directories.Any()) return;
+                if (!directories.Any()) return default;
 
                 foreach (var directory in directories)
                 {
